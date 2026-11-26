@@ -1,0 +1,185 @@
+<div id="csp-overlay" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(248,249,250,0.88);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;">
+  <div style="
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 2rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 820px;
+      width: 90%;">
+    <style>
+      .ray3  { stroke-dasharray: 8 12; animation: dash3 1.5s linear infinite; }
+      @keyframes dash3 { to { stroke-dashoffset: -20; } }
+      .thermal-pulse3 { animation: pulse3 2s infinite alternate ease-in-out; }
+      @keyframes pulse3 {
+        0%   { fill: #EF8E0B; stroke: #EF8E0B; filter: drop-shadow(0 0 2px #EF8E0B); }
+        100% { fill: #FFA726; stroke: #FFA726; filter: drop-shadow(0 0 8px #FFA726); }
+      }
+      .air-pulse3 { animation: air3 2s infinite alternate ease-in-out; }
+      .air-pulse3-async { animation: air3 2s infinite alternate ease-in-out; animation-delay: -2s; }
+      @keyframes air3 {
+        0%   { opacity: 0.4; filter: drop-shadow(0 0 2px #6B91DD); }
+        100% { opacity: 0.8; filter: drop-shadow(0 0 6px #6B91DD); }
+      }
+      .flow3      { stroke-dasharray: 8 8; animation: flow3-anim 1.5s linear infinite; }
+      @keyframes flow3-anim { to { stroke-dashoffset: -16; } }
+      .flow3-down { stroke-dasharray: 8 8; animation: flow3-down 1s linear infinite; }
+      @keyframes flow3-down { to { stroke-dashoffset: -16; } }
+      .flow3-up   { stroke-dasharray: 8 8; animation: flow3-up 1s linear infinite; }
+      @keyframes flow3-up   { to { stroke-dashoffset: 16; } }
+      .spin3 { animation: spin3 2s linear infinite; transform-origin: 550px 240px; }
+      @keyframes spin3 { 100% { transform: rotate(360deg); } }
+      .elec-pulse3 { animation: elec-pulse3 1.5s infinite alternate ease-in-out; }
+      @keyframes elec-pulse3 {
+        0%   { opacity: 0.6; filter: drop-shadow(0 0 2px #ffca28); }
+        100% { opacity: 1;   filter: drop-shadow(0 0 8px #ffca28); }
+      }
+      .elec-flow3 { stroke-dasharray: 8 16; animation: elec3-anim 2.5s ease-in-out infinite alternate; }
+      @keyframes elec3-anim {
+        0%   { stroke-dashoffset:  48; }
+        100% { stroke-dashoffset: -48; }
+      }
+    </style>
+    <svg width="100%" style="max-width:750px;" height="320" viewBox="0 0 750 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow3" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.15"/>
+        </filter>
+        <linearGradient id="towerGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#b0b5be" />
+          <stop offset="50%"  stop-color="#e2e6eb" />
+          <stop offset="100%" stop-color="#8d949e" />
+        </linearGradient>
+        <linearGradient id="tankGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#9aa0ab" />
+          <stop offset="50%"  stop-color="#ccd2db" />
+          <stop offset="100%" stop-color="#7a818c" />
+        </linearGradient>
+        <radialGradient id="sunGrad3" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#ffffff" />
+          <stop offset="40%"  stop-color="#ffca28" />
+          <stop offset="100%" stop-color="#EF8E0B" />
+        </radialGradient>
+      </defs>
+      <!-- Ground -->
+      <line x1="30" y1="270" x2="750" y2="270" stroke="#cbd0d8" stroke-width="4" stroke-linecap="round" />
+      <!-- Sun -->
+      <circle cx="50" cy="50" r="25" fill="url(#sunGrad3)" filter="url(#shadow3)" />
+      <circle cx="50" cy="50" r="38" fill="none" stroke-width="0.5" class="thermal-pulse3" opacity="0.5"/>
+      <!-- Thermal pipe: Tower -> TES -->
+      <path d="M 245 90 L 245 140 L 490 140 L 490 190" fill="none" stroke="#EF8E0B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 245 90 L 245 140 L 490 140 L 490 190" fill="none" stroke="#FFE0B2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flow3" />
+      <!-- Tower -->
+      <polygon points="230,270 270,270 260,90 240,90" fill="url(#towerGrad3)" filter="url(#shadow3)" />
+      <line x1="250" y1="90" x2="250" y2="270" stroke="#717885" stroke-width="1.5" opacity="0.6" />
+      <rect x="238" y="86" width="24" height="4" fill="#a0a5af" />
+      <rect x="240" y="60" width="20" height="26" rx="2" class="thermal-pulse3" />
+      <rect x="238" y="56" width="24" height="4" fill="#a0a5af" />
+      <!-- Heliostat pedestals -->
+      <rect x="93"  y="254" width="4" height="16" fill="#8d949e" />
+      <rect x="173" y="264" width="4" height="6"  fill="#8d949e" />
+      <rect x="323" y="264" width="4" height="6"  fill="#8d949e" />
+      <rect x="403" y="254" width="4" height="16" fill="#8d949e" />
+      <!-- Heliostats -->
+      <rect x="70"  y="250" width="50" height="8" rx="1" transform="rotate(25 95 254)"   fill="#6B91DD" stroke="#4A6AA8" stroke-width="1" filter="url(#shadow3)" />
+      <rect x="150" y="260" width="50" height="8" rx="1" transform="rotate(10 175 264)"  fill="#6B91DD" stroke="#4A6AA8" stroke-width="1" filter="url(#shadow3)" />
+      <rect x="300" y="260" width="50" height="8" rx="1" transform="rotate(-10 325 264)" fill="#6B91DD" stroke="#4A6AA8" stroke-width="1" filter="url(#shadow3)" />
+      <rect x="380" y="250" width="50" height="8" rx="1" transform="rotate(-25 405 254)" fill="#6B91DD" stroke="#4A6AA8" stroke-width="1" filter="url(#shadow3)" />
+      <!-- Solar rays (incident) -->
+      <line x1="50" y1="50" x2="95"  y2="254" stroke="#ffca28" stroke-width="2" opacity="0.6" class="ray3" />
+      <line x1="50" y1="50" x2="175" y2="264" stroke="#ffca28" stroke-width="2" opacity="0.6" class="ray3" />
+      <line x1="50" y1="50" x2="325" y2="264" stroke="#ffca28" stroke-width="2" opacity="0.6" class="ray3" />
+      <line x1="50" y1="50" x2="405" y2="254" stroke="#ffca28" stroke-width="2" opacity="0.6" class="ray3" />
+      <!-- Solar rays (reflected) -->
+      <line x1="95"  y1="254" x2="250" y2="75" stroke="#ffca28" stroke-width="3" class="ray3" />
+      <line x1="175" y1="264" x2="250" y2="75" stroke="#ffca28" stroke-width="3" class="ray3" />
+      <line x1="325" y1="264" x2="250" y2="75" stroke="#ffca28" stroke-width="3" class="ray3" />
+      <line x1="405" y1="254" x2="250" y2="75" stroke="#ffca28" stroke-width="3" class="ray3" />
+      <!-- TES tank -->
+      <rect x="465" y="190" width="50" height="80" rx="3" fill="url(#tankGrad3)" filter="url(#shadow3)" />
+      <rect x="468" y="220" width="44" height="48" rx="1" class="thermal-pulse3" />
+      <rect x="465" y="185" width="50" height="5"  rx="2" fill="#a0a5af" />
+      <!-- Thermal pipe: TES -> Generator -->
+      <path d="M 490 240 L 525 240" fill="none" stroke="#EF8E0B" stroke-width="8" stroke-linecap="round" />
+      <path d="M 490 240 L 525 240" fill="none" stroke="#FFE0B2" stroke-width="2.5" stroke-linecap="round" class="flow3" />
+      <!-- CAES cavern -->
+      <path d="M 530 270 L 530 280 Q 500 285 490 310 Q 480 345 515 350 Q 550 355 575 345 Q 610 330 600 300 Q 590 285 570 280 L 570 270 Z"
+            fill="#e2e6eb" stroke="#a0a5af" stroke-width="2" />
+      <path d="M 535 285 Q 510 290 500 312 Q 492 340 520 343 Q 550 347 568 338 Q 598 325 590 302 Q 582 290 565 285 Z"
+            fill="#6B91DD" class="air-pulse3" />
+      <!-- CAES bidirectional pipes -->
+      <path d="M 540 265 L 540 295" fill="none" stroke="#6B91DD" stroke-width="8" stroke-linecap="round" class="air-pulse3" />
+      <path d="M 540 265 L 540 295" fill="none" stroke="#D0E0FF" stroke-width="2.5" stroke-linecap="round" class="flow3-down" />
+      <path d="M 560 265 L 560 295" fill="none" stroke="#6B91DD" stroke-width="8" stroke-linecap="round" class="air-pulse3-async" />
+      <path d="M 560 265 L 560 295" fill="none" stroke="#D0E0FF" stroke-width="2.5" stroke-linecap="round" class="flow3-up" />
+      <!-- Generator / turbine building -->
+      <rect x="525" y="210" width="50" height="60" rx="3" fill="url(#towerGrad3)" filter="url(#shadow3)" />
+      <rect x="522" y="205" width="56" height="5"  rx="2" fill="#8d949e" />
+      <!-- Spinning turbine -->
+      <circle cx="550" cy="240" r="16" fill="#e2e6eb" />
+      <circle cx="550" cy="240" r="13" fill="#a0a5af" />
+      <g class="spin3">
+        <rect x="548" y="228" width="4" height="24" rx="1" fill="#4b5563" />
+        <rect x="538" y="238" width="24" height="4" rx="1" fill="#4b5563" />
+        <circle cx="550" cy="240" r="3" fill="#1f2937" />
+      </g>
+      <!-- Transformer -->
+      <rect x="585" y="240" width="16" height="30" rx="2" fill="#7a818c" filter="url(#shadow3)" />
+      <line x1="585" y1="247" x2="601" y2="247" stroke="#4b5563" stroke-width="1" />
+      <line x1="585" y1="254" x2="601" y2="254" stroke="#4b5563" stroke-width="1" />
+      <line x1="585" y1="261" x2="601" y2="261" stroke="#4b5563" stroke-width="1" />
+      <line x1="575" y1="265" x2="585" y2="265" stroke="#a0a5af" stroke-width="3" />
+      <!-- Transmission tower (lattice) -->
+      <polyline points="640,270 660,70 680,270" fill="none" stroke="#8d949e" stroke-width="2" filter="url(#shadow3)" />
+      <line x1="644" y1="230" x2="676" y2="230" stroke="#8d949e" stroke-width="1.5" />
+      <line x1="648" y1="190" x2="672" y2="190" stroke="#8d949e" stroke-width="1.5" />
+      <line x1="652" y1="150" x2="668" y2="150" stroke="#8d949e" stroke-width="1.5" />
+      <line x1="656" y1="110" x2="664" y2="110" stroke="#8d949e" stroke-width="1.5" />
+      <line x1="640" y1="270" x2="676" y2="230" stroke="#8d949e" stroke-width="1" />
+      <line x1="680" y1="270" x2="644" y2="230" stroke="#8d949e" stroke-width="1" />
+      <line x1="644" y1="230" x2="672" y2="190" stroke="#8d949e" stroke-width="1" />
+      <line x1="676" y1="230" x2="648" y2="190" stroke="#8d949e" stroke-width="1" />
+      <line x1="648" y1="190" x2="668" y2="150" stroke="#8d949e" stroke-width="1" />
+      <line x1="672" y1="190" x2="652" y2="150" stroke="#8d949e" stroke-width="1" />
+      <line x1="652" y1="150" x2="664" y2="110" stroke="#8d949e" stroke-width="1" />
+      <line x1="668" y1="150" x2="656" y2="110" stroke="#8d949e" stroke-width="1" />
+      <line x1="620" y1="150" x2="700" y2="150" stroke="#8d949e" stroke-width="2" />
+      <line x1="640" y1="110" x2="680" y2="110" stroke="#8d949e" stroke-width="2" />
+      <line x1="620" y1="150" x2="620" y2="160" stroke="#e2e6eb" stroke-width="2" />
+      <line x1="660" y1="110" x2="660" y2="120" stroke="#e2e6eb" stroke-width="2" />
+      <line x1="700" y1="150" x2="700" y2="160" stroke="#e2e6eb" stroke-width="2" />
+      <!-- Transmission cables (background) -->
+      <path d="M 595 242 Q 605 200 620 160" fill="none" stroke="#a0a5af" stroke-width="2" />
+      <path d="M 595 242 Q 625 180 660 120" fill="none" stroke="#a0a5af" stroke-width="2" />
+      <path d="M 595 242 Q 645 200 700 160" fill="none" stroke="#a0a5af" stroke-width="2" />
+      <path d="M 620 160 Q 685 190 750 160" fill="none" stroke="#a0a5af" stroke-width="2" />
+      <path d="M 660 120 Q 705 150 750 120" fill="none" stroke="#a0a5af" stroke-width="2" />
+      <path d="M 700 160 Q 725 180 750 170" fill="none" stroke="#a0a5af" stroke-width="2" />
+      <!-- Electric flow animation -->
+      <path d="M 595 242 Q 605 200 620 160" fill="none" stroke="#ffca28" stroke-width="3" class="elec-flow3" />
+      <path d="M 595 242 Q 625 180 660 120" fill="none" stroke="#ffca28" stroke-width="3" class="elec-flow3" />
+      <path d="M 595 242 Q 645 200 700 160" fill="none" stroke="#ffca28" stroke-width="3" class="elec-flow3" />
+      <path d="M 620 160 Q 685 190 750 160" fill="none" stroke="#ffca28" stroke-width="3" class="elec-flow3" />
+      <path d="M 660 120 Q 705 150 750 120" fill="none" stroke="#ffca28" stroke-width="3" class="elec-flow3" />
+      <path d="M 700 160 Q 725 180 750 170" fill="none" stroke="#ffca28" stroke-width="3" class="elec-flow3" />
+      <!-- Lightning bolt icon -->
+      <path d="M 570 165 L 555 195 L 568 195 L 555 225 L 585 185 L 570 185 Z"
+            fill="#ffca28" stroke="#EF8E0B" stroke-width="1.5" class="elec-pulse3" />
+    </svg>
+    <p style="color:#4b5563; font-size:1rem; margin-top:0.75rem; font-family:sans-serif; font-weight:500;">
+      Running annual energy simulation — __PROGRESS_VALUE__% complete
+    </p>
+    <progress value="__PROGRESS_VALUE__" max="100" style="width:85%;accent-color:#6B91DD;"></progress>
+  </div>
+</div>

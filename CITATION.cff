@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "ASTERIx-CAESar CSP-CAES Techno-Economic Simulator"
+type: software
+version: "1.0.0"
+authors:
+  - family-names: "Baigorri"
+    given-names: "Javier"
+    affiliation: "Fundación CENER, Spain"
+  - family-names: "Zaversky"
+    given-names: "Fritz"
+    affiliation: "Fundación CENER, Spain"
+repository-code: "https://github.com/asterixcaesar/asterix-caesar-simulator"
+url: "https://asterix-caesar.eu/"
+license: "MIT"
+keywords:
+  - concentrated solar power
+  - compressed air energy storage
+  - techno-economic assessment
+  - PyPSA
+  - energy storage
+
